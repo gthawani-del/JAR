@@ -1,0 +1,39 @@
+'use client';
+
+import { ArrowRight, Menu } from 'lucide-react';
+import Link from 'next/link';
+import { JarLogo } from '@/components/brand/jar-logo';
+import { ThemeToggle } from './theme-toggle';
+
+const nav = [
+  ['Expertise', '/expertise'],
+  ['Sectors', '/sectors'],
+  ['Intelligence', '/intelligence'],
+  ['Ask JAR', '/ask-jar'],
+  ['About Us', '/about'],
+  ['Contact', '/contact'],
+] as const;
+
+export function SiteHeader() {
+  return (
+    <header className="container flex items-center justify-between py-7">
+      <JarLogo />
+      <nav className="hidden gap-12 text-sm font-bold uppercase lg:flex">
+        {nav.map(([label, href]) => (
+          <Link key={href} href={href} className="hover:text-[var(--gold)]">
+            {label}
+          </Link>
+        ))}
+      </nav>
+      <div className="flex items-center gap-3">
+        <Link href="/contact" className="btn btn-primary hidden sm:inline-flex">
+          Let&apos;s Connect <ArrowRight size={16} />
+        </Link>
+        <ThemeToggle />
+        <button className="icon-ring lg:hidden" aria-label="Open menu">
+          <Menu size={20} />
+        </button>
+      </div>
+    </header>
+  );
+}

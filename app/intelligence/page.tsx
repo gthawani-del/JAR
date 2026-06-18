@@ -1,0 +1,2 @@
+import { PageHero } from '@/components/sections/page-hero';import{LatestInsightsSection}from'@/components/sections/latest-insights-section';
+export default function IntelligencePage(){return <><PageHero eyebrow="Intelligence" title="Research and insight for better decisions." body="Perspective on public modernization, intelligent systems and regulated market strategy."/><LatestInsightsSection/></>}

@@ -1,0 +1,17 @@
+do $$ declare t text; begin foreach t in array array['admin_users','media_assets','site_sections','navigation_items','seo_entries','expertise_items','sectors','engagements','case_studies','insights','metrics','leadership_profiles','ask_jar_prompts','ask_jar_conversations','ask_jar_messages','ask_jar_lead_events','leads','ask_jar_queries','subscribers','analytics_events','audit_logs'] loop execute format('alter table %I enable row level security',t); end loop; end $$;
+create policy "public media read" on media_assets for select using (bucket='public-media' and archived_at is null);
+create policy "admin media read" on media_assets for select using (is_viewer_or_above());
+create policy "editor media write" on media_assets for all using (is_editor_or_above()) with check (is_editor_or_above());
+create policy "admin users self read" on admin_users for select using (auth.uid()=auth_user_id or is_super_admin());
+create policy "super admin users write" on admin_users for all using (is_super_admin()) with check (is_super_admin());
+do $$ declare t text; begin foreach t in array array['site_sections','navigation_items','expertise_items','sectors','engagements','case_studies','insights','metrics','leadership_profiles','ask_jar_prompts'] loop execute format('create policy "public published read" on %I for select using (status = ''published'')',t); execute format('create policy "admin read" on %I for select using (is_viewer_or_above())',t); execute format('create policy "editor draft write" on %I for insert with check (is_editor_or_above() and status <> ''published'')',t); execute format('create policy "editor draft update" on %I for update using (is_editor_or_above()) with check ((is_super_admin()) or status <> ''published'')',t); end loop; end $$;
+create policy "public seo read" on seo_entries for select using (noindex=false);
+create policy "admin seo read" on seo_entries for select using (is_viewer_or_above());
+create policy "editor seo write" on seo_entries for all using (is_editor_or_above()) with check (is_editor_or_above());
+create policy "admin private read conversations" on ask_jar_conversations for select using (is_viewer_or_above());
+create policy "admin private read messages" on ask_jar_messages for select using (is_viewer_or_above());
+create policy "admin private read lead events" on ask_jar_lead_events for select using (is_viewer_or_above());
+create policy "admin private read leads" on leads for select using (is_viewer_or_above());
+create policy "admin update leads" on leads for update using (is_editor_or_above()) with check (is_editor_or_above());
+create policy "admin read analytics" on analytics_events for select using (is_viewer_or_above());
+create policy "super admin read audit" on audit_logs for select using (is_super_admin());
