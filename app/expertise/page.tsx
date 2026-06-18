@@ -1,0 +1,2 @@
+import { PageHero } from '@/components/sections/page-hero';import{ExpertiseSection}from'@/components/sections/expertise-section';import{AskJarSection}from'@/components/sections/ask-jar-section';
+export default function ExpertisePage(){return <><PageHero eyebrow="Capabilities" title="Strategic capability for complex environments." body="Advisory, intelligence and digital systems for regulated markets and public institutions."/><ExpertiseSection/><AskJarSection/></>}

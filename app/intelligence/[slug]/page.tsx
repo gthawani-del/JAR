@@ -1,0 +1,2 @@
+import { PageHero } from '@/components/sections/page-hero';
+export default async function InsightDetail({params}:{params:Promise<{slug:string}>}){const{slug}=await params;return <><PageHero eyebrow="Insight" title={slug.replaceAll('-',' ')} body="Insight detail content will be served from the CMS article system."/><article className="container panel p-8 leading-8 text-[var(--muted-foreground)]">This article page is ready for CMS-managed body content, cover media, author metadata and SEO fields.</article></>}
