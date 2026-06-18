@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function Confirmation(){return <section className="container py-20"><div className="panel p-10"><p className="eyebrow">Ask JAR</p><h1 className="serif mt-5 text-6xl">Conversation recorded.</h1><p className="mt-5 text-[var(--muted-foreground)]">Your advisory intelligence conversation has been captured for review.</p><Link className="btn btn-primary mt-8" href="/ask-jar">Return to Ask JAR</Link></div></section>}

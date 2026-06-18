@@ -1,0 +1,3 @@
+import { AskJarConsole } from '@/components/forms/ask-jar-console';
+export default function AskJarPage({searchParams}:{searchParams:Promise<{q?:string}>}){return <Ask searchParams={searchParams}/>}
+async function Ask({searchParams}:{searchParams:Promise<{q?:string}>}){const sp=await searchParams;return <section className="container py-10"><div className="mb-8"><p className="eyebrow">Ask JAR Intelligence</p><h1 className="serif mt-5 text-6xl leading-none">Premium advisory intelligence console.</h1><p className="mt-5 max-w-2xl text-[var(--muted-foreground)]">Explore strategic questions through a structured conversation experience built for complex, regulated and high-stakes environments.</p></div><AskJarConsole initialQuestion={sp.q}/></section>}

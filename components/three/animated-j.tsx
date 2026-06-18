@@ -1,0 +1,5 @@
+'use client';
+import dynamic from 'next/dynamic';
+const Scene=dynamic(()=>import('./animated-j-scene').then(m=>m.AnimatedJScene),{ssr:false,loading:()=> <JFallback/>});
+export function AnimatedJ(){return <div className="relative min-h-[360px] md:min-h-[560px]"><Scene/><JFallback overlay/></div>}
+function JFallback({overlay=false}:{overlay?:boolean}){return <div className={(overlay?'pointer-events-none absolute inset-0 ':'')+'grid place-items-center'}><div className="relative h-[300px] w-[300px] md:h-[520px] md:w-[520px]"><div className="absolute inset-0 rounded-full border border-[var(--gold)] opacity-25"/><div className="absolute inset-10 rounded-full border border-[var(--gold)] opacity-20"/><div className="serif absolute inset-0 grid place-items-center text-[18rem] font-black leading-none text-transparent md:text-[30rem]" style={{WebkitTextStroke:'12px color-mix(in srgb,var(--foreground) 82%,var(--gold))'}}>J</div><div className="absolute inset-0 bg-[radial-gradient(var(--gold)_1px,transparent_1px)] [background-size:22px_22px] opacity-30"/></div></div>}

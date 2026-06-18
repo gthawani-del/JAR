@@ -1,0 +1,2 @@
+import { expertise } from '@/lib/cms/data';import{ExpertiseCard}from'@/components/cards/expertise-card';import{SectionDivider}from'@/components/brand/section-divider';
+export function ExpertiseSection(){return <section className="container py-5"><SectionDivider>Our Expertise</SectionDivider><div className="grid gap-4 md:grid-cols-3 xl:grid-cols-6">{expertise.map(([t,b,i])=><ExpertiseCard key={t} title={t} body={b} icon={i as any}/>)}</div></section>}

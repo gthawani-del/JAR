@@ -1,0 +1,2 @@
+import { NextResponse } from 'next/server';import { randomUUID } from 'crypto';import { leadSchema } from '@/lib/validation/lead';import { hashIp, requestIp } from '@/lib/analytics/hash-ip';
+export async function POST(request:Request){const json=await request.json().catch(()=>({}));const parsed=leadSchema.safeParse(json);if(!parsed.success)return NextResponse.json({error:'Invalid lead'}, {status:400});const ip_hash=await hashIp(requestIp(request));return NextResponse.json({lead:{id:randomUUID(),...parsed.data,status:'new',ip_hash,created_at:new Date().toISOString()}})}
